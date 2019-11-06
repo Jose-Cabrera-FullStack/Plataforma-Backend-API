@@ -2,9 +2,12 @@ const express = require('express');
 const UsersService = require('../services/users')
 const joi = require('@hapi/joi')
 
-const { userIdSchema,createUserSchema,updateUserSchema}= require('../utils/schema/users');
+const { userIdSchema, createUserSchema, updateUserSchema }= require('../utils/schema/users');
 
-const validationHandler = require('../utils/middleware/validationHandler')
+const validationHandler = require('../utils/middleware/validationHandler');
+
+const cacheResponse = require('../utils/cacheReponse');
+const { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } = require('../utils/time');
 
 function usersApi(app) {
     const router = express.Router();
@@ -14,6 +17,7 @@ function usersApi(app) {
 
 
     router.get("/", async function(req, res, next){
+        cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
         const{tags} = req.query;
         
         try{
@@ -30,6 +34,7 @@ function usersApi(app) {
     });
     
     router.get("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params') , async function(req, res, next){
+        cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
         const { userId } = req.params;
 
         try{
