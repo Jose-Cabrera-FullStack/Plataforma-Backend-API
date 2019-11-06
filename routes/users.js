@@ -1,11 +1,17 @@
 const express = require('express');
 const UsersService = require('../services/users')
+const joi = require('@hapi/joi')
+
+const { userIdSchema,createUserSchema,updateUserSchema}= require('../utils/schema/users');
+
+const validationHandler = require('../utils/middleware/validationHandler')
 
 function usersApi(app) {
     const router = express.Router();
+    const usersService = new UsersService();
+    
     app.use("/api/users", router);
 
-    const usersService = new UsersService();
 
     router.get("/", async function(req, res, next){
         const{tags} = req.query;
@@ -23,7 +29,7 @@ function usersApi(app) {
         }
     });
     
-    router.get("/:userId", async function(req, res, next){
+    router.get("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params') , async function(req, res, next){
         const { userId } = req.params;
 
         try{
@@ -38,7 +44,7 @@ function usersApi(app) {
             next(err)
         }
     });
-    router.post("/", async function(req, res, next){
+    router.post("/", validationHandler(createUserSchema), async function(req, res, next){
         const { body: user} = req;
 
         try{
@@ -53,7 +59,7 @@ function usersApi(app) {
             next(err)
         }
     });
-    router.put("/:userId", async function(req, res, next){
+    router.put("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema) ,async function(req, res, next){
         const { userId } = req.params;
         const { body: user} = req;
 
@@ -73,7 +79,7 @@ function usersApi(app) {
         }
     });
 
-    router.patch('/:userId', async (req, res, next) => {
+    router.patch('/:userId',validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema), async (req, res, next) => {
         const { userId } = req.params;
         const { body: user} = req;
     
@@ -92,7 +98,7 @@ function usersApi(app) {
         }
     })
 
-    router.delete("/:userId", async function(req, res, next){
+    router.delete("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params'), async function(req, res, next){
         const { userId } = req.params;
 
         try{

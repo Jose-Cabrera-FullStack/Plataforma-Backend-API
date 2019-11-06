@@ -5,11 +5,14 @@
   "main": "index.js",
   "scripts": {
     "dev": "set DEBUG=app:db&& nodemon index.js",
-    "start": "set NODE_ENV=production&&nodemon index.js"
+    "start": "set NODE_ENV=production&&nodemon index.js",
+    "inspect": "set DEBUG=express:*,app:*&&nodemon --inspect index"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@hapi/boom": "^8.0.1",
+    "@hapi/joi": "^16.1.7",
     "dotenv": "^8.0.0",
     "express": "^4.17.1"
   },
