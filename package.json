@@ -1,7 +1,10 @@
 {
   "name": "plataforma-backend-api",
   "version": "1.0.0",
-  "description": "",
+  "description": "That is the backend of the plataform",
+  "repository": {
+    "url": "https://github.com/Jose-Cabrera-FullStack/Plataforma-Backend-API"
+  },
   "main": "index.js",
   "scripts": {
     "dev": "set DEBUG=app:db&& nodemon index.js",
@@ -13,10 +16,18 @@
   "dependencies": {
     "@hapi/boom": "^8.0.1",
     "@hapi/joi": "^16.1.7",
+    "bcrypt": "^3.0.6",
     "dotenv": "^8.0.0",
-    "express": "^4.17.1"
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mongodb": "^3.3.3",
+    "now": "^16.4.4",
+    "passport": "^0.4.0",
+    "passport-http": "^0.3.0",
+    "passport-jwt": "^4.0.0"
   },
   "devDependencies": {
+    "chalk": "^3.0.0",
     "eslint": "^6.0.1",
     "eslint-config-prettier": "^6.0.0",
     "eslint-plugin-prettier": "^3.1.0",

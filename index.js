@@ -1,7 +1,8 @@
 const express = require('express');
 const app = express();
-
 const { config } = require('./config/index');
+
+const authApi = require('./routes/auth');
 const usersApi = require('./routes/users')
 
 const {
@@ -15,9 +16,11 @@ const notFoundHandler = require('./utils/middleware/notFoundHandler')
 //body-parser
 app.use(express.json());
 
+//Routes
+authApi(app)
 usersApi(app);
 
-//routes
+//Catch404
 app.use(notFoundHandler);
 
 //Errors middleware

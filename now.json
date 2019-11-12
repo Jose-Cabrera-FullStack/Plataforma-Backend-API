@@ -1,0 +1,13 @@
+{
+    "name": "plataforma",
+    "version":2,
+    "builds": [{"src":"index.js", "use":"@now/node-server"}],
+    "routes": [{"src":"/(.*)", "dest":"index.js"}],
+    "env":{
+        "DB_USER":"@plataforma-db-user",
+        "DB_PASSWORD":"@plataforma-db-password",
+        "DB_HOST":"@plataforma-db-host",
+        "DB_NAME":"@plataforma-db-name"
+    }
+
+}

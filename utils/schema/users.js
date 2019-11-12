@@ -12,46 +12,48 @@ const userContentRatingSchema = joi.string().max(5);
 const userOrderSchema = joi.number();
 const userDiscordchema = joi.string().min(2).max(40);
 
-const createUserSchema = joi.object({
+const userSchema = joi.object({
   name: userNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
   // repeat_password: userRepeatPasswordSchema.required(),
-  birthday: userBirthDaySchema.required(),
-  elo: userEloSchema.required(),
-  lp: userLpSchema.required(),
-  contentRating: userContentRatingSchema.required(),
-  order: userOrderSchema.required(),
-  discord: userDiscordchema
-});
-
-const updateUserSchema = {
-  name: userNameSchema,
-  email: userEmailSchema,
-  password: userPasswordSchema,
-  // repeat_password: userRepeatPasswordSchema,
   birthday: userBirthDaySchema,
   elo: userEloSchema,
   lp: userLpSchema,
   contentRating: userContentRatingSchema,
   order: userOrderSchema,
-  discord: userDiscordchema,
+  discord: userDiscordchema
+});
+
+const createUserSchema = {
+  ...userSchema,
+  isAdmin: joi.boolean(),
+}
+
+const updateUserSchema = {
+  ...createUserSchema,
+};
+
+const createProviderUserSchema = {
+  ...createUserSchema,
+  apiKeyToken: joi.string().required()
 };
 
 module.exports = {
   userIdSchema,
-  createUserSchema,
-  updateUserSchema
+  userSchema,
+  updateUserSchema,
+  createProviderUserSchema
 };
 
 // {
-// 	"name": "Jose"
-// 	"email": "Jose@gmail.com"
-// 	"password": "jojojo"
-// 	"birthday": "1996"
-// 	"elo": "Diamante"
-// 	"lp": 15
-// 	"contentRating": 4
-// 	"order": 4
-// 	"discord": "jejeje"
+// 	"name": "Jose",
+// 	"email": "Jose@gmail.com",
+// 	"password": "jojojo",
+// 	"birthday": "1996",
+// 	"elo": "Diamante",
+// 	"lp": 15,
+// 	"contentRating": "4",
+// 	"order": 4,
+// 	"discord": "jejeje",
 // }
