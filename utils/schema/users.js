@@ -27,7 +27,7 @@ const userSchema = joi.object({
 
 const createUserSchema = {
   ...userSchema,
-  isAdmin: joi.boolean(),
+   isAdmin: joi.boolean(),
 }
 
 const updateUserSchema = {
@@ -41,7 +41,7 @@ const createProviderUserSchema = {
 
 module.exports = {
   userIdSchema,
-  userSchema,
+  createUserSchema,
   updateUserSchema,
   createProviderUserSchema
 };
