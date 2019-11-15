@@ -1,13 +1,18 @@
 const express = require('express');
+const passport = require('passport');
 const UsersService = require('../services/users')
 const joi = require('@hapi/joi')
 
 const { userIdSchema, createUserSchema, updateUserSchema }= require('../utils/schema/users');
 
 const validationHandler = require('../utils/middleware/validationHandler');
+const scopesValidationsHandler = require('../utils/middleware/scopesValidationsHandler');
 
 const cacheResponse = require('../utils/cacheReponse');
 const { FIVE_MINUTES_IN_SECONDS, SIXTY_MINUTES_IN_SECONDS } = require('../utils/time');
+
+//JWT strategies
+require('../utils/auth/strategies/jwt');
 
 function usersApi(app) {
     const router = express.Router();
@@ -16,7 +21,7 @@ function usersApi(app) {
     app.use("/api/users", router);
 
 
-    router.get("/", async function(req, res, next){
+    router.get("/", passport.authenticate('jwt',{session:false}),scopesValidationsHandler(['read:users']) ,async function(req, res, next){
         cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
         const{tags} = req.query;
         
@@ -33,7 +38,7 @@ function usersApi(app) {
         }
     });
     
-    router.get("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params') , async function(req, res, next){
+    router.get("/:userId",passport.authenticate('jwt',{session:false}),scopesValidationsHandler(['read:users']), validationHandler(joi.object({ userId: userIdSchema}), 'params') , async function(req, res, next){
         cacheResponse(res, SIXTY_MINUTES_IN_SECONDS);
         const { userId } = req.params;
 
@@ -49,7 +54,7 @@ function usersApi(app) {
             next(err)
         }
     });
-    router.post("/", validationHandler(createUserSchema), async function(req, res, next){
+    router.post("/", passport.authenticate('jwt',{session:false}),scopesValidationsHandler(['create:users']),validationHandler(createUserSchema), async function(req, res, next){
         const { body: user} = req;
 
         try{
@@ -64,7 +69,7 @@ function usersApi(app) {
             next(err)
         }
     });
-    router.put("/:userId", validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema) ,async function(req, res, next){
+    router.put("/:userId",passport.authenticate('jwt',{session:false}), scopesValidationsHandler(['update:users']),validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema) ,async function(req, res, next){
         const { userId } = req.params;
         const { body: user} = req;
 
@@ -84,7 +89,7 @@ function usersApi(app) {
         }
     });
 
-    router.patch('/:userId',validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema), async (req, res, next) => {
+    router.patch('/:userId',passport.authenticate('jwt',{session:false}),scopesValidationsHandler(['delete:users']),validationHandler(joi.object({ userId: userIdSchema}), 'params'), validationHandler(updateUserSchema), async (req, res, next) => {
         const { userId } = req.params;
         const { body: user} = req;
     

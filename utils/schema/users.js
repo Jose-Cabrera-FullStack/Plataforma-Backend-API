@@ -3,7 +3,7 @@ const joi = require('@hapi/joi');
 const userIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const userNameSchema = joi.string().max(80);
 const userEmailSchema = joi.string().max(80);
-const userPasswordSchema = joi.string().pattern(/^[a-zA-Z0-9]{3,30}$/);
+const userPasswordSchema = joi.string().regex(/^[a-zA-Z0-9]{3,30}$/);
 // const userRepeatPasswordSchema = joi.ref('userPasswordSchema'); Usar una variable que almacene el password para luego hacer la comparación
 const userBirthDaySchema = joi.number().min(1960).max(2007);
 const userEloSchema = joi.string().max(20);
@@ -16,6 +16,7 @@ const createUserSchema = joi.object({
   name: userNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
+  isAdmin: joi.boolean(),
   // repeat_password: userRepeatPasswordSchema.required(),
   birthday: userBirthDaySchema,
   elo: userEloSchema,
@@ -47,13 +48,6 @@ const createProviderUserSchema = {
   name: userNameSchema.required(),
   email: userEmailSchema.required(),
   password: userPasswordSchema.required(),
-  // repeat_password: userRepeatPasswordSchema.required(),
-  birthday: userBirthDaySchema,
-  elo: userEloSchema,
-  lp: userLpSchema,
-  contentRating: userContentRatingSchema,
-  order: userOrderSchema,
-  discord: userDiscordchema,
   apiKeyToken: joi.string().required()
 };
 
