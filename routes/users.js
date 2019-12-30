@@ -32,7 +32,7 @@ function usersApi(app) {
                 data: users,
                 message: 'users listed'
             });
-
+ 
         }catch(err){
             next(err)
         }
