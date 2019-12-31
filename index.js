@@ -4,7 +4,8 @@ const app = express();
 const { config } = require('./config/index');
 
 const authApi = require('./routes/auth');
-const usersApi = require('./routes/users')
+const usersApi = require('./routes/users');
+const coursesApi = require('./routes/courses')
 
 const {
   logErrors,
@@ -21,6 +22,7 @@ app.use(helmet());
 //Routes
 authApi(app)
 usersApi(app);
+coursesApi(app);
 
 //Catch404
 app.use(notFoundHandler);
