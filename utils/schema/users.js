@@ -23,7 +23,7 @@ const createUserSchema = {
   server:userServer.required(),
   contentRating: userContentRatingSchema,
   discord: userDiscordchema,
-  classes: [createCourseSchema]
+  classes: createCourseSchema
 };
 
 
@@ -34,7 +34,7 @@ const updateUserSchema = {
   birthday: userBirthDaySchema,
   contentRating: userContentRatingSchema,
   discord: userDiscordchema,
-  classes: [createCourseSchema.required()]
+  classes: joi.array().items(createCourseSchema) // Me costo un webo
  };
 
 const createProviderUserSchema = {
