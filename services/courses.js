@@ -17,11 +17,7 @@ class CoursesService {
     const courses = await this.mongoDB.getAll(this.collection, query);
     return courses || [];
   }
-  
-  // async getCourse({ schedule }) {
-  //   const [course] = await this.mongoDB.getAll(this.collection, { schedule });
-  //   return course;
-  // }
+
   async getCourse({
     courseId
   }) {

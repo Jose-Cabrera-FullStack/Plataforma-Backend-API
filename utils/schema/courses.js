@@ -40,10 +40,9 @@ module.exports = {
 };
 
 // {
-// 	"schedule": "17.01.2020",
+// 	"schedule": "1996-10-16 11:11:11",
 // 	"coach": "murdoc",
 // 	"type": "Profesional Player",
-// 	"enable": "true",
 // 	"price": "500",
 // 	"premium": "false",
 // }
