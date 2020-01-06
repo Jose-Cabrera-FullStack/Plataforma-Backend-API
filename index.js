@@ -6,6 +6,7 @@ const { config } = require('./config/index');
 const authApi = require('./routes/auth');
 const usersApi = require('./routes/users');
 const coursesApi = require('./routes/courses')
+const userCoursesApi = require('./routes/userCourse')
 
 const {
   logErrors,
@@ -23,6 +24,7 @@ app.use(helmet());
 authApi(app)
 usersApi(app);
 coursesApi(app);
+userCoursesApi(app);
 
 //Catch404
 app.use(notFoundHandler);
