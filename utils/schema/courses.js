@@ -1,31 +1,27 @@
 const joi = require('@hapi/joi');
 
-
 const emun = ["SOLO","COACHING"]
 // Clases
 const courseIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
+const courseUserIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseCoachIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseSchedule = joi.date().iso();//debe ser asi "1996-10-16 11:11:11"
 const courseCoachName = joi.string().max(80);
 const courseTypeClass = joi.string().valid(...emun);
 const coursePrice = joi.number().min(0).max(1000);
 const coursePremium = joi.boolean();
-const userDate = joi.date().iso();
+const userDate = joi.date().default(Date.now, 'time of creation');
 
 
 const createCourseSchema = joi.object({
+  user_id: courseUserIdSchema.required(),
   schedule: courseSchedule.required(),
   coach: courseCoachName.required(),
   type: courseTypeClass.required(),
   price: coursePrice.required(),
   premium: coursePremium.required(),
-  date: userDate.required()
+  date: userDate,
 })
-
-// const createUserSchema = {
-//   ...userSchema,
-//    isAdmin: joi.boolean(),
-// }
 
 const updateCourseSchema = {
   schedule: courseSchedule.required(),
@@ -39,10 +35,13 @@ module.exports = {
   updateCourseSchema
 };
 
+
 // {
-// 	"schedule": "1996-10-16 11:11:11",
-// 	"coach": "murdoc",
-// 	"type": "Profesional Player",
-// 	"price": "500",
-// 	"premium": "false",
+//   "user_id":"5df02e7faad68a3d1c58135d",
+//   "schedule": "1996-10-16 11:11:11",
+//   "coach": "murdoc",
+//   "type": "COACHING",
+//   "price": "500",
+//   "premium": "false",
+//   "date": "2020-01-01 01:01:01"
 // }

@@ -4,12 +4,17 @@ const boom = require('@hapi/boom');
 const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
+const CoursesService = require('../services/courses');
 const validationHandler = require('../utils/middleware/validationHandler');
 
 const {
   createUserSchema,
   createProviderUserSchema
 } = require('../utils/schema/users');
+
+const {
+  createCourseSchema
+} = require('../utils/schema/courses');
 
 const { config } = require('../config');
 
@@ -22,6 +27,7 @@ function authApi(app) {
 
   const apiKeysService = new ApiKeysService();
   const usersService = new UsersService();
+  const coursesService = new CoursesService();
 
   router.post('/sign-in', async function(req, res, next) {
 
@@ -82,6 +88,24 @@ function authApi(app) {
       res.status(201).json({
         data: createdUserId,
         message: 'user created'
+      });
+    } catch (error) {
+      next(error);
+    }
+  });
+  router.post('/courses', validationHandler(createCourseSchema), async function(
+    req,
+    res,
+    next
+  ) {
+    const { body: course } = req;
+
+    try {
+      const createdCourseId = await coursesService.createCourse({ course });
+
+      res.status(201).json({
+        data: createdCourseId,
+        message: 'course created'
       });
     } catch (error) {
       next(error);

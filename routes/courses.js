@@ -2,6 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const CoursesService = require('../services/courses');
 
+const { userIdSchema } = require('../utils/schema/users');
+
 const {
   courseIdSchema,
   courseCoachIdSchema,
