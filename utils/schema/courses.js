@@ -1,16 +1,17 @@
 const joi = require('@hapi/joi');
 
-const emun = ["SOLO","COACHING"]
+const type = ["SOLO","COACHING"]
+const premium = ["NORMAL","PREMIUM"]
 // Clases
 const courseIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseUserIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseCoachIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseSchedule = joi.date().iso();//debe ser asi "1996-10-16 11:11:11"
 const courseCoachName = joi.string().max(80);
-const courseTypeClass = joi.string().valid(...emun);
+const courseTypeClass = joi.string().valid(...type);
 const coursePrice = joi.number().min(0).max(1000);
-const coursePremium = joi.boolean();
-const userDate = joi.date().default(Date.now, 'time of creation');
+const coursePremium = joi.string().valid(...premium);
+// const userDate = joi.date().iso();
 
 
 const createCourseSchema = joi.object({
@@ -20,7 +21,7 @@ const createCourseSchema = joi.object({
   type: courseTypeClass.required(),
   price: coursePrice.required(),
   premium: coursePremium.required(),
-  date: userDate,
+  // date: userDate,
 })
 
 const updateCourseSchema = {
@@ -34,6 +35,12 @@ module.exports = {
   createCourseSchema,
   updateCourseSchema
 };
+
+function convertDate(inputFormat) {
+  function pad(s) { return (s < 10) ? '0' + s : s; }
+  var d = new Date(inputFormat)
+  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
+}
 
 
 // {
