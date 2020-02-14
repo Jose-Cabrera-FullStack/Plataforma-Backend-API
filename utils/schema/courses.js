@@ -11,6 +11,7 @@ const courseCoachName = joi.string().max(80);
 const courseTypeClass = joi.string().valid(...type);
 const coursePrice = joi.number().min(0).max(1000);
 const coursePremium = joi.string().valid(...premium);
+const courseDates = joi.array().items(joi.string().min(9).max(10))
 // const userDate = joi.date().iso();
 
 
@@ -21,6 +22,7 @@ const createCourseSchema = joi.object({
   type: courseTypeClass.required(),
   price: coursePrice.required(),
   premium: coursePremium.required(),
+  dates: courseDates.required(),
   // date: userDate,
 })
 
@@ -35,13 +37,6 @@ module.exports = {
   createCourseSchema,
   updateCourseSchema
 };
-
-function convertDate(inputFormat) {
-  function pad(s) { return (s < 10) ? '0' + s : s; }
-  var d = new Date(inputFormat)
-  return [pad(d.getDate()), pad(d.getMonth()+1), d.getFullYear()].join('/')
-}
-
 
 // {
 //   "user_id":"5df02e7faad68a3d1c58135d",

@@ -28,7 +28,7 @@ class CoursesService {
   async createCourse({
     course
   }) {
-    const { schedule, coach, type,enable,price,premium,user_id } = course;
+    const { schedule, coach, type,enable,price,premium,user_id,dates } = course;
 
     const createCourseId = await this.mongoDB.create(this.collection, {
       user_id,
@@ -38,6 +38,7 @@ class CoursesService {
       type,
       price,
       premium,
+      dates
     });
 
     return createCourseId;

@@ -23,12 +23,12 @@ class UsersService {
     const [user] = await this.mongoDB.getAll(this.collection, { email });
     return user;
   }
-  // async getUser({
-  //   userId
-  // }) {
-  //   const user = await this.mongoDB.get(this.collection, userId);
-  //   return user || {};
-  // }
+ async getUserId({
+   userId
+ }) {
+   const user = await this.mongoDB.get(this.collection, userId);
+   return user || {};
+ }
 
   async createUser({
     user
