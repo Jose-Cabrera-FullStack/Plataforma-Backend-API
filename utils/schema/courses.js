@@ -12,6 +12,7 @@ const courseTypeClass = joi.string().valid(...type);
 const coursePrice = joi.number().min(0).max(1000);
 const coursePremium = joi.string().valid(...premium);
 const courseDates = joi.array().items(joi.string().min(9).max(10))
+const courseNumbers = joi.number().min(2).max(9);
 // const userDate = joi.date().iso();
 
 
@@ -23,6 +24,7 @@ const createCourseSchema = joi.object({
   price: coursePrice.required(),
   premium: coursePremium.required(),
   dates: courseDates.required(),
+  classes:courseNumbers.required()
   // date: userDate,
 })
 

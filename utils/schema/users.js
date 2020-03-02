@@ -12,6 +12,7 @@ const userBirthDaySchema = joi.number().min(1960).max(2007);
 const userContentRatingSchema = joi.string().max(80);
 const userDiscordchema = joi.string().min(2).max(40);
 const userServer = joi.string().valid(...emun); 
+const userVerified = joi.boolean(); // testear
 
 
 const createUserSchema = {
@@ -23,7 +24,8 @@ const createUserSchema = {
   server:userServer.required(),
   contentRating: userContentRatingSchema,
   discord: userDiscordchema,
-  classes: createCourseSchema
+  classes: createCourseSchema,
+  verified: userVerified
 };
 
 

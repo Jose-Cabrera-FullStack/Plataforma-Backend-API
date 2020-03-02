@@ -28,7 +28,17 @@ class CoursesService {
   async createCourse({
     course
   }) {
-    const { schedule, coach, type,enable,price,premium,user_id,dates } = course;
+    const {
+      schedule,
+      coach,
+      type,
+      enable,
+      price,
+      premium,
+      user_id,
+      dates,
+      classes
+    } = course;
 
     const createCourseId = await this.mongoDB.create(this.collection, {
       user_id,
@@ -38,24 +48,36 @@ class CoursesService {
       type,
       price,
       premium,
-      dates
+      dates,
+      classes
     });
 
     return createCourseId;
   }
 
-  async getOrCreateCourse({course}) {
-    const queriedCourse = await this.getUser({schedule:course.schedule});
+  async getOrCreateCourse({
+    course
+  }) {
+    const queriedCourse = await this.getUser({
+      schedule: course.schedule
+    });
 
-    if(queriedCourse) {
+    if (queriedCourse) {
       return queriedCourse;
     }
 
-    await this.createCourse({course});
-    return await this.getCourse({course:course.schedule});
+    await this.createCourse({
+      course
+    });
+    return await this.getCourse({
+      course: course.schedule
+    });
   }
 
-  async updateCourse({courseId,course}={}) {
+  async updateCourse({
+    courseId,
+    course
+  } = {}) {
     const updatedCourseId = await this.mongoDB.update(this.collection, courseId, course);
     return updatedCourseId;
   }
@@ -65,7 +87,9 @@ class CoursesService {
     return updatedCourseId
   }
 
-  async deleteCourse({courseId}) {
+  async deleteCourse({
+    courseId
+  }) {
     const deletedCourseId = await this.mongoDB.delete(this.collection, courseId);
     return deletedCourseId;
   }
