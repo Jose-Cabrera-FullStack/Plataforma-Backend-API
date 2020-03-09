@@ -21,9 +21,9 @@ app.use(express.json());
 app.use(helmet());
 
 //Routes
+coursesApi(app);
 authApi(app)
 usersApi(app);
-coursesApi(app);
 userCoursesApi(app);
 
 //Catch404

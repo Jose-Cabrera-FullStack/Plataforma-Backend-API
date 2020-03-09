@@ -2,7 +2,7 @@ const MongoLib = require('../lib/mongo');
 
 class ApiKeysService {
   constructor() {
-    this.collection = 'api-keys';
+    this.collection = 'apiKey';
     this.mongoDB = new MongoLib();
   }
 

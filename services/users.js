@@ -46,6 +46,7 @@ class UsersService {
       contentRating,
       classes,
       discord,
+      server,
       verified
     } = user;
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -59,6 +60,7 @@ class UsersService {
       contentRating,
       discord,
       classes,
+      server,
       verified
     });
 

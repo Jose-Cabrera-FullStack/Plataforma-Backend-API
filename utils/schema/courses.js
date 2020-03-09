@@ -2,6 +2,7 @@ const joi = require('@hapi/joi');
 
 const type = ["SOLO","COACHING"]
 const premium = ["NORMAL","PREMIUM"]
+const status = ["Terminada","En Curso"]
 // Clases
 const courseIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
 const courseUserIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);
@@ -13,6 +14,7 @@ const coursePrice = joi.number().min(0).max(1000);
 const coursePremium = joi.string().valid(...premium);
 const courseDates = joi.array().items(joi.string().min(9).max(10))
 const courseNumbers = joi.number().min(2).max(9);
+const courseStatus = joi.string().valid(...status);
 // const userDate = joi.date().iso();
 
 
@@ -24,7 +26,8 @@ const createCourseSchema = joi.object({
   price: coursePrice.required(),
   premium: coursePremium.required(),
   dates: courseDates.required(),
-  classes:courseNumbers.required()
+  classes:courseNumbers.required(),
+  status: courseStatus.required()
   // date: userDate,
 })
 

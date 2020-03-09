@@ -1,5 +1,5 @@
 // DEBUG=app:* node scripts/mongo/seedApiKeys.js
-// set DEBUG=app:*&&node seedApiKeys.js
+// set DEBUG=app:* && node scripts/mongo/seedApiKeys.js
 
 const chalk = require('chalk');
 const crypto = require('crypto');

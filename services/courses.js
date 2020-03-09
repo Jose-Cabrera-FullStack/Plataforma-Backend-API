@@ -37,7 +37,8 @@ class CoursesService {
       premium,
       user_id,
       dates,
-      classes
+      classes,
+      status
     } = course;
 
     const createCourseId = await this.mongoDB.create(this.collection, {
@@ -49,7 +50,8 @@ class CoursesService {
       price,
       premium,
       dates,
-      classes
+      classes,
+      status
     });
 
     return createCourseId;

@@ -2,11 +2,8 @@ const express = require('express');
 const passport = require('passport');
 const CoursesService = require('../services/courses');
 
-const { userIdSchema } = require('../utils/schema/users');
-
 const {
   courseIdSchema,
-  courseCoachIdSchema,
   createCourseSchema,
   updateCourseSchema
 } = require('../utils/schema/courses');
@@ -94,6 +91,7 @@ function coursesApi(app) {
       res,
       next
     ) {
+      cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
       const {
         body: course
       } = req;

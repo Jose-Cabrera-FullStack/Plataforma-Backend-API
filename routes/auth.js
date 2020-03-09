@@ -49,17 +49,19 @@ function authApi(app) {
           }
 
           const apiKey = await apiKeysService.getApiKey({ token: apiKeyToken });
+          console.log('aca',apiKey)
 
           if (!apiKey) {
             next(boom.unauthorized());
           }
 
-          const { _id: id, name, email } = user;
+          const { _id: id, name, email, server } = user;
 
           const payload = {
             sub: id,
             name,
             email,
+            server,
             scopes: apiKey.scopes
           };
 
