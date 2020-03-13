@@ -17,6 +17,7 @@
     "@hapi/boom": "^8.0.1",
     "@hapi/joi": "15.1.0",
     "@hapi/joi-date": "^2.0.1",
+    "axios": "^0.19.2",
     "bcrypt": "^3.0.6",
     "body-parser": "^1.19.0",
     "cors": "^2.8.5",
@@ -29,7 +30,8 @@
     "now": "^16.4.4",
     "passport": "^0.4.0",
     "passport-http": "^0.3.0",
-    "passport-jwt": "^4.0.0"
+    "passport-jwt": "^4.0.0",
+    "passport-oauth": "^1.0.0"
   },
   "devDependencies": {
     "chalk": "^3.0.0",
