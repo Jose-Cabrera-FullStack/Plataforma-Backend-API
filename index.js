@@ -7,6 +7,7 @@ const authApi = require('./routes/auth');
 const usersApi = require('./routes/users');
 const coursesApi = require('./routes/courses')
 const userCoursesApi = require('./routes/userCourse')
+const emailApi = require('./routes/mails')
 
 const {
   logErrors,
@@ -25,6 +26,7 @@ coursesApi(app);
 authApi(app)
 usersApi(app);
 userCoursesApi(app);
+emailApi(app)
 
 //Catch404
 app.use(notFoundHandler);
