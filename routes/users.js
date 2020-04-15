@@ -51,6 +51,31 @@ function usersApi(app) {
         }
     });
 
+    router.get("/ids",validationHandler(joi.object({
+        userId: userIdSchema
+    }), 'params'), async function (req, res, next) {
+        cacheResponse(res, FIVE_MINUTES_IN_SECONDS);
+        const {
+            _id
+        } = req.query;
+        
+        // console.log('IDS puto',req)
+        try {
+            const users = await usersService.getUsers({
+                _id
+            });
+            // throw new Error ('Error Getting users')
+            res.status(200).json({
+                data: users,
+                body:'prueba',
+                message: 'users listed'
+            });
+            
+        } catch (err) {
+            next(err)
+        }
+    });
+
     router.get("/:userId",
         passport.authenticate('jwt', {
             session: false

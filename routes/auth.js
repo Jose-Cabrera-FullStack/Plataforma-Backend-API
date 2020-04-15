@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
 const CoursesService = require('../services/courses');
+const confirmationEmail = require('../services/confirmation');
 const validationHandler = require('../utils/middleware/validationHandler');
 
 const {
@@ -83,6 +84,8 @@ function authApi(app) {
     next
   ) {
     const { body: user } = req;
+    const request = req
+    const result = res
 
     try {
       const createdUserId = await usersService.createUser({ user });
@@ -91,6 +94,9 @@ function authApi(app) {
         data: createdUserId,
         message: 'user created'
       });
+
+      confirmationEmail(user,request,createdUserId)
+
     } catch (error) {
       next(error);
     }

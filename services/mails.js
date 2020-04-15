@@ -5,15 +5,14 @@ module.exports = (form) => {
     var transporter = nodemailer.createTransport({
         service: 'gmail',
         auth: {
-            user: process.env.EMAIL, 
-            pass: process.env.PASSWORD 
+            user: process.env.EMAIL,
+            pass: process.env.PASSWORD
         }
     });
 
     let userHost = transporter.options.auth.user
 
     const mailOptions = {
-        from: `<${form.nombre}>`,
         to: userHost, // Cambia esta parte por el destinatario
         subject: form.case,
         html: `
