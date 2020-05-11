@@ -88,16 +88,16 @@ class UsersService {
 
   async updateUser({
     userId,
-    user
+    verified
   } = {}) {
-    const updatedUserId = await this.mongoDB.update(this.collection, userId, user);
+    const updatedUserId = await this.mongoDB.update(this.collection, userId, verified);
     return updatedUserId;
   }
 
-  async partialUpdateUser() {
-    const updatedUserId = await Promise.resolve(usersMock[0].id)
-    return updatedUserId
-  }
+  // async partialUpdateUser() {
+  //   const updatedUserId = await Promise.resolve(usersMock[0].id)
+  //   return updatedUserId
+  // }
 
   async deleteUser({
     userId

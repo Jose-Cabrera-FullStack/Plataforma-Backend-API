@@ -59,15 +59,13 @@ function usersApi(app) {
             _id
         } = req.query;
         
-        // console.log('IDS puto',req)
         try {
             const users = await usersService.getUsers({
                 _id
             });
-            // throw new Error ('Error Getting users')
+
             res.status(200).json({
                 data: users,
-                body:'prueba',
                 message: 'users listed'
             });
             
@@ -136,13 +134,13 @@ function usersApi(app) {
         } = req;
 
         try {
-            const updateMovieId = await usersService.updateUser({
+            const updateUserId = await usersService.updateUser({
                 userId,
                 user
             });
 
             res.status(200).json({
-                data: updateMovieId,
+                data: updateUserId,
                 message: 'users updated'
             });
 

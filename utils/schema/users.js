@@ -36,7 +36,8 @@ const updateUserSchema = {
   birthday: userBirthDaySchema,
   contentRating: userContentRatingSchema,
   discord: userDiscordchema,
-  classes: joi.array().items(createCourseSchema) // Me costo un webo
+  classes: joi.array().items(createCourseSchema), // Me costo un webo
+  verified: userVerified
  };
 
 const createProviderUserSchema = {

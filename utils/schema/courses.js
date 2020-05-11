@@ -1,7 +1,7 @@
 const joi = require('@hapi/joi');
 
 const type = ["SOLO","COACHING"]
-const premium = ["NORMAL","PREMIUM"]
+const premium = ["NORMAL","IRONS","DIAMONDS","MASTERS","CHALLENGERS"]
 const status = ["Terminada","En Curso"]
 // Clases
 const courseIdSchema = joi.string().regex(/^[0-9a-fA-F]{24}$/);

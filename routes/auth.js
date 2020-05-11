@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 const ApiKeysService = require('../services/apiKeys');
 const UsersService = require('../services/users');
 const CoursesService = require('../services/courses');
-const confirmationEmail = require('../services/confirmation');
+// const confirmationEmail = require('../services/confirmation');
 const validationHandler = require('../utils/middleware/validationHandler');
 
 const {
@@ -34,6 +34,7 @@ function authApi(app) {
 
     const { apiKeyToken } = req.body;
 
+    
     if (!apiKeyToken) {
       next(boom.unauthorized('apiKeyToken is required'));
     }
@@ -43,14 +44,14 @@ function authApi(app) {
         if (error || !user) {
           next(boom.unauthorized());
         }
-
+        // console.log('aca',user)
+        
         req.login(user, { session: false }, async function(error) {
           if (error) {
             next(error);
           }
 
           const apiKey = await apiKeysService.getApiKey({ token: apiKeyToken });
-          console.log('aca',apiKey)
 
           if (!apiKey) {
             next(boom.unauthorized());
@@ -84,9 +85,7 @@ function authApi(app) {
     next
   ) {
     const { body: user } = req;
-    const request = req
-    const result = res
-
+    
     try {
       const createdUserId = await usersService.createUser({ user });
 
@@ -94,8 +93,6 @@ function authApi(app) {
         data: createdUserId,
         message: 'user created'
       });
-
-      confirmationEmail(user,request,createdUserId)
 
     } catch (error) {
       next(error);
