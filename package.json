@@ -1,0 +1,59 @@
+{
+  "name": "plataforma-backend-api",
+  "version": "1.0.0",
+  "description": "That is the backend of the plataform",
+  "repository": {
+    "url": "https://github.com/Jose-Cabrera-FullStack/Plataforma-Backend-API"
+  },
+  "main": "index.js",
+  "scripts": {
+    "dev": "DEBUG=app:db&& nodemon index.js",
+    "start": "NODE_ENV=production&&nodemon index.js",
+    "inspect": "DEBUG=express:*,app:*&&nodemon --inspect index"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@hapi/boom": "8.0.1",
+    "@hapi/joi": "15.1.0",
+    "@hapi/joi-date": "2.0.1",
+    "axios": "0.19.2",
+    "bcrypt": "3.0.6",
+    "body-parser": "1.19.0",
+    "cors": "2.8.5",
+    "dotenv": "8.0.0",
+    "express": "4.17.1",
+    "helmet": "3.21.2",
+    "jsonwebtoken": "8.5.1",
+    "mongodb": "3.3.3",
+    "nodemailer": "6.4.5",
+    "now": "16.4.4",
+    "passport": "0.4.0",
+    "passport-facebook": "3.0.0",
+    "passport-google-oauth": "2.0.0",
+    "passport-http": "0.3.0",
+    "passport-jwt": "4.0.0",
+    "passport-oauth": "1.0.0"
+  },
+  "devDependencies": {
+    "chalk": "3.0.0",
+    "eslint": "6.0.1",
+    "eslint-config-prettier": "6.0.0",
+    "eslint-plugin-prettier": "3.1.0",
+    "husky": "3.0.0",
+    "lint-staged": "9.2.0",
+    "nodemon": "1.19.1",
+    "prettier": "1.18.2"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.js": [
+      "eslint --fix",
+      "git add"
+    ]
+  }
+}
