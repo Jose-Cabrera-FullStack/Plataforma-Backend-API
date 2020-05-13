@@ -33,7 +33,6 @@ function authApi(app) {
   router.post('/sign-in', async function(req, res, next) {
 
     const { apiKeyToken } = req.body;
-
     
     if (!apiKeyToken) {
       next(boom.unauthorized('apiKeyToken is required'));
