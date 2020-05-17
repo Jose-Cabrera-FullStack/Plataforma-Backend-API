@@ -9,7 +9,7 @@ function validate(data, schema) {
 function validationHandler(schema, check = 'body') {
   return function(req, res, next) {
     const error = validate(req[check], schema);
-    console.log(req)
+    // console.log(req)
 
     error ? next(boom.badRequest(error)) : next();
   };
