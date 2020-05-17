@@ -39,7 +39,7 @@ function emailApi(app) {
                 data:"updateUserId",
                 message: `recibi el mensaje ${req.body.id}`
             });
-            console.log(req.body.id)
+            // console.log(req.body.id)
 
         }catch(e){
             res.send('error')

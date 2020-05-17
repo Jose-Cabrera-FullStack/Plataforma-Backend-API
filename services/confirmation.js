@@ -3,9 +3,9 @@ require('dotenv').config();
 
 module.exports = (user,req,createdUserId) => {
 
-    console.log(user);
+    // console.log(user);
 
-    console.log('createdUserId',createdUserId)
+    // console.log('createdUserId',createdUserId)
 
     let transporter = nodemailer.createTransport({
         service: 'gmail',
@@ -14,8 +14,6 @@ module.exports = (user,req,createdUserId) => {
             pass: process.env.PASSWORD
         }
     });
-
-    let userHost = transporter.options.auth.user
 
     let link = "http://" + "localhost:4000/confirm:" + createdUserId;
 

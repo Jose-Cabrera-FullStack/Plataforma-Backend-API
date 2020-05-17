@@ -34,7 +34,7 @@ function authApi(app) {
 
     const { apiKeyToken } = req.body;
 
-    console.log('hola',req, 'chao')
+    // console.log('hola',req, 'chao')
     
     if (!apiKeyToken) {
       next(boom.unauthorized('apiKeyToken is required'));
