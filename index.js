@@ -39,5 +39,5 @@ app.use(errorHandler);
 app.listen(config.port, function() {
   // const debug = require('debug')('app:server');
   // debug(`Listening http://localhost:${config.port}`) sirve para hacer debug de las rutas y analizar su rendimiento.
-  console.log(`Listening http://localhost:${config.port}`)
+  console.log(`Listening http://summonerscave:${config.port}`)
 });

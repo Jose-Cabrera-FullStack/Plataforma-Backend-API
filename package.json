@@ -7,9 +7,9 @@
   },
   "main": "index.js",
   "scripts": {
-    "dev": "set DEBUG=app:db&& nodemon index.js",
-    "start": "set NODE_ENV=production&&nodemon index.js",
-    "inspect": "set DEBUG=express:*,app:*&&nodemon --inspect index"
+    "dev": " DEBUG=app:db&& nodemon index.js",
+    "start": " NODE_ENV=production&&nodemon index.js",
+    "inspect": " DEBUG=express:*,app:*&&nodemon --inspect index"
   },
   "author": "",
   "license": "ISC",
