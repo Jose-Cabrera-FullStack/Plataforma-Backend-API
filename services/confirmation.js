@@ -15,7 +15,7 @@ module.exports = (user,req,createdUserId) => {
         }
     });
 
-    let link = "http://" + "localhost:4000/confirm:" + createdUserId;
+    let link = "http://" + "summonerscave:80/confirm:" + createdUserId;
 
     const mailOptions = {
         to: user.email, // Cambia esta parte por el destinatario
