@@ -1,10 +1,6 @@
 const express = require('express');
-// const passport = require('passport');
-// const UsersService = require('../services/users')
-// const joi = require('@hapi/joi')
 
 const configMessage = require('../services/mails');
-// const updateUser = require('../services/users');
 
 //JWT strategies
 require('../utils/auth/strategies/jwt');
@@ -33,13 +29,13 @@ function emailApi(app) {
             // const updateUserId = await usersService.updateUser({
             //     id,
             //     verified
-            // });
+            // }); -------------->Arreglar
 
             res.status(200).json({
-                data:"updateUserId",
+                data:'updateUserId',
                 message: `recibi el mensaje ${req.body.id}`
             });
-            console.log(req.body.id)
+            // console.log(req.body.id)
 
         }catch(e){
             res.send('error')
