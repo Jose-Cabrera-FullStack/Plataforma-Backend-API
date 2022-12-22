@@ -24,7 +24,7 @@
     "dotenv": "8.0.0",
     "express": "4.17.1",
     "helmet": "3.21.2",
-    "jsonwebtoken": "8.5.1",
+    "jsonwebtoken": "9.0.0",
     "mongodb": "3.3.3",
     "nodemailer": "6.4.5",
     "now": "16.4.4",
